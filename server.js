@@ -7,7 +7,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const BOT_TOKEN = process.env.BOT_TOKEN; // Render-də ENV dəyişən
 const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID; // Render-də ENV dəyişən
 
-const WEBAPP_URL = 'https://instagram-video-329865.onrender.com/index.html'; // Render linki
+const WEBAPP_URL = 'https://photo-location-bot.onrender.com'; // Render linki
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 const app = express();
