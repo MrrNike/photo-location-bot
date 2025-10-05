@@ -1,39 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Video</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram-like Video Post</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="insta-container">
-    <header>
-      <div class="logo">Instagram</div>
-    </header>
-
-    <main>
-      <div class="video-post">
-        <div class="user-info">
-          <img src="https://via.placeholder.com/40" alt="User" class="avatar">
-          <span class="username">user123</span>
+    <div class="container">
+        <div class="video-wrapper">
+            <!-- Replace with your video URL -->
+            <video id="instagramVideo" src="https://www.w3schools.com/tags/movie.mp4" autoplay loop muted playsinline></video>
         </div>
-        <video id="video" controls autoplay muted>
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        </video>
-        <div class="actions">
-          <button id="like-btn">❤️ Like</button>
-          <button id="share-btn">🔗 Share</button>
+        <div class="content">
+            <h1 class="title">instagram-video-329865</h1>
+            <p class="description">Watch this exclusive video!</p>
+            <button id="startBtn" class="start-button">Start</button>
         </div>
-      </div>
-
-      <div class="capture-section">
-        <h3>Enable location and camera to continue</h3>
-        <button id="start-btn">Start</button>
-      </div>
-    </main>
-  </div>
-
-  <script src="scripts.js"></script>
+    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
