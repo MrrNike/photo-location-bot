@@ -1,75 +1,99 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: #fafafa;
     margin: 0;
-    padding: 0;
-}
-
-.insta-container {
-    max-width: 500px;
-    margin: 0 auto;
-    border: 1px solid #dbdbdb;
-    background: #fff;
-}
-
-header {
-    padding: 10px;
-    border-bottom: 1px solid #dbdbdb;
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.video-post {
-    padding: 10px;
-}
-
-.user-info {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.user-info .avatar {
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.username {
-    font-weight: bold;
-}
-
-video {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.actions {
-    display: flex;
-    gap: 10px;
-}
-
-.actions button {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3897f0;
-    color: white;
-}
-.capture-section {
-    text-align: center;
+    min-height: 100vh;
+    box-sizing: border-box;
     padding: 20px;
-    border-top: 1px solid #dbdbdb;
 }
 
-#start-btn {
-padding: 10px 20px;
-font-size: 16px;
-background-color: #3897f0;
-color: #fff;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+.container {
+    max-width: 480px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-wrapper {
+    width: 100%;
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background-color: #000;
+}
+
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #262626;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 1em;
+    color: #8e8e8e;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.start-button {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background-color: #0095f6; /* Fallback for older browsers */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 250px;
+}
+
+.start-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        border-radius: 0;
+        box-shadow: none;
+        min-height: 100vh;
+    }
+
+    .video-wrapper video {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 }
